@@ -32,3 +32,32 @@ function appendFigureToGallery(figure) {
   const gallery = document.querySelector('.gallery');
   gallery.appendChild(figure);
 }
+
+// Création des boutons dans
+
+const portfolioSection = document.getElementById('portfolio');
+
+const filterMenu = document.createElement('div');
+filterMenu.className = 'filter-menu';
+
+function createButton(id, text) {
+  const button = document.createElement('button');
+  button.id = id;
+  button.textContent = text;
+  button.className = 'btn';
+  return button;
+}
+
+const buttons = [
+  createButton('Tous', 'Tous'),
+  createButton('Objets', 'Objets'),
+  createButton('Appartements', 'Appartements'),
+  createButton('Hotels', 'Hotels & Restaurants'),
+];
+
+buttons.forEach((button) => filterMenu.appendChild(button));
+
+const galleryDiv = portfolioSection.querySelector('.gallery');
+portfolioSection.insertBefore(filterMenu, galleryDiv);
+
+console.log(filterMenu);
