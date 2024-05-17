@@ -1,34 +1,34 @@
 const url = 'http://localhost:5678/api/works';
 fetch(url)
   .then((response) => response.json())
-  .then((data) => {
-    addProjects(data);
-  });
-const gallery = document.querySelector('.gallery');
-const figure = document.createElement('figure');
+  .then((data) => addProjects(data));
 
+//Cette fonction va boucler l'Array d'items et créer une balise figure pour chaque item
 function addProjects(data) {
-  console.log(data);
-  makeFigure(data);
-  appendFigureToGallery(figure);
+  data.forEach((item) => {
+    makeProject(item);
+    const figure = makeProject(item);
+    appendFigureToGallery(figure);
+  });
 }
-
-function makeFigure(data) {
+// Cette fonction crée une balise html correspondant à l'item projet
+function makeProject(data) {
+  const baliseFigure = document.createElement('figure');
   const img = document.createElement('img');
   const figCaption = document.createElement('figcaption');
-  const title = data[0].title;
-  const imageUrl = data[0].imageUrl;
-
-  figure.appendChild(img);
+  const { id, title, imageUrl } = data;
   img.src = imageUrl;
   img.alt = title;
-  figure.appendChild(figCaption);
   figCaption.innerHTML = title;
 
-  console.log(figure);
+  baliseFigure.appendChild(img);
+  baliseFigure.appendChild(figCaption);
+
+  return baliseFigure;
 }
 
+//Cette fonction ajoute la balise créée à la galerie
 function appendFigureToGallery(figure) {
-  console.log(gallery);
+  const gallery = document.querySelector('.gallery');
   gallery.appendChild(figure);
 }
