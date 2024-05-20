@@ -202,20 +202,34 @@ li:hover {
 }
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
 }
 
 .filter-menu {
   display: flex;
   justify-content: center;
   gap: 0.6rem;
+  margin: 3em 0;
 }
 
 .btn {
   font-family: 'Syne';
   border-radius: 2rem;
-  padding: 0.3rem 1rem;
+  padding: 0.5rem 0.5rem;
   min-width: 80px;
+  color: #1d6154;
+  border-color: #1d6154;
+  border-width: 1px;
+  background-color: white;
+}
+
+.btn:hover {
+  background-color: #1d61540e;
+  cursor: pointer;
+}
+
+.active-button {
+  background-color: #1d6154;
+  color: white;
 }
 
 .gallery {
