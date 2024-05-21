@@ -1,124 +1,3 @@
-// const url = 'http://localhost:5678/api/works';
-// let storedData = null;
-
-// async function fetchData(url) {
-//   try {
-//     const response = await fetch(url);
-//     if (!response.ok) {
-//       throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error('Error fetching data', error);
-//   }
-// }
-
-// async function main() {
-//   try {
-//     storedData = await fetchData(url);
-//     if (storedData) {
-//       displayProjects(storedData);
-//     }
-//   } catch (error) {
-//     console.error('Failed to load projects:', error);
-//     showErrorMessage('Failed to load projects. Please try again later.');
-//   }
-// }
-
-// function displayProjects(data) {
-//   const displayedProjectIds = new Set();
-//   data.forEach((item) => {
-//     if (!displayedProjectIds.has(item.id)) {
-//       const project = makeProject(item);
-//       appendProjectToGallery(project);
-//       displayedProjectIds.add(item.id);
-//     }
-//   });
-// }
-
-// function makeProject(item) {
-//   const { categoryId, title, imageUrl } = item;
-//   const figure = document.createElement('figure');
-//   const img = document.createElement('img');
-//   const figCaption = document.createElement('figcaption');
-
-//   img.src = imageUrl;
-//   img.alt = title;
-//   figCaption.textContent = title;
-//   figure.className = categoryId;
-//   figure.append(img, figCaption);
-
-//   return figure;
-// }
-
-// function appendProjectToGallery(figure) {
-//   const gallery = document.querySelector('.gallery');
-//   gallery.appendChild(figure);
-// }
-
-// function setupFilterButtons() {
-//   const portfolioSection = document.getElementById('portfolio');
-//   const gallery = portfolioSection.querySelector('.gallery');
-//   const filterMenu = document.createElement('div');
-//   filterMenu.className = 'filter-menu';
-//   portfolioSection.insertBefore(filterMenu, gallery);
-
-//   const filterButtons = setButtonParams();
-//   filterButtons.forEach((itemButton) => {
-//     const button = createButton(itemButton.id, itemButton.text);
-//     button.addEventListener('click', () =>
-//       handleButtonClick(button, itemButton)
-//     );
-//     filterMenu.appendChild(button);
-//   });
-// }
-
-// function createButton(id, text) {
-//   const button = document.createElement('button');
-//   button.id = id;
-//   button.textContent = text;
-//   button.className = 'btn';
-//   return button;
-// }
-
-// function setButtonParams() {
-//   return [
-//     { id: 'Tous', text: 'Tous', categoryId: null },
-//     { id: 'Objets', text: 'Objets', categoryId: 1 },
-//     { id: 'Appartements', text: 'Appartements', categoryId: 2 },
-//     { id: 'Hotels', text: 'Hotels & Restaurants', categoryId: 3 },
-//   ];
-// }
-
-// function handleButtonClick(button, itemButton) {
-//   resetButtonStyle();
-//   button.classList.add('active-button');
-//   clearGallery();
-//   const filteredData = itemButton.categoryId
-//     ? filterData(storedData, itemButton.categoryId)
-//     : storedData;
-//   displayProjects(filteredData);
-// }
-
-// function resetButtonStyle() {
-//   document.querySelectorAll('.btn').forEach((button) => {
-//     button.className = 'btn';
-//   });
-// }
-
-// function clearGallery() {
-//   document.querySelectorAll('figure').forEach((figure) => figure.remove());
-// }
-
-// function filterData(data, categoryId) {
-//   if (categoryId === null) return data;
-//   return data.filter((item) => item.categoryId === categoryId);
-// }
-
-// setupFilterButtons();
-// main();
-
-// Définition de l'URL de l'API
 const url = 'http://localhost:5678/api/works';
 let storedData = null;
 
@@ -250,6 +129,21 @@ function filterData(data, categoryId) {
     ? data
     : data.filter((item) => item.categoryId === categoryId);
 }
+
+//Login Section
+
+const loginButton = document.getElementById('login-button');
+loginButton.addEventListener('click', function () {
+  window.location.href = './login.html';
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  console.log(window.location.pathname);
+  const loginButton = document.getElementById('login-button');
+  if (window.location.pathname === '/FrontEnd/login.html') {
+    loginButton.style.fontWeight = 'bold';
+  }
+});
 
 // Initialisation de l'application
 setupFilterButtons();

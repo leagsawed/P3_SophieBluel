@@ -177,6 +177,11 @@ nav li {
 li:hover {
   color: #b1663c;
 }
+
+.bold {
+  font-weight: bold;
+}
+
 #introduction {
   display: flex;
   align-items: center;
@@ -223,12 +228,18 @@ li:hover {
 }
 
 .btn:hover {
-  background-color: #1d61540e;
+  background-color: #1d61542c;
   cursor: pointer;
 }
 
 .active-button {
   background-color: #1d6154;
+  color: white;
+}
+
+.active-button:hover {
+  border-color: #1d6154e0;
+  background-color: #1d6154e0;
   color: white;
 }
 
@@ -245,6 +256,8 @@ li:hover {
 }
 #contact {
   width: 50%;
+  min-width: 280px;
+
   margin: auto;
 }
 #contact > * {
@@ -283,6 +296,42 @@ input[type='submit'] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+}
+
+#login {
+  width: 33%;
+  min-width: 280px;
+  margin: auto;
+}
+#login > * {
+  text-align: center;
+}
+
+#login form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#login input {
+  height: 50px;
+  font-size: 1.2em;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+  margin: 2em 0 1em 0;
+}
+
+#login input[type='submit'] {
+  width: 220px;
+}
+
+#forgot-password {
+  text-align: center;
+  text-decoration: underline;
+  color: #1d6154;
 }
 
 footer nav ul {
