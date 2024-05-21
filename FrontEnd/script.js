@@ -138,12 +138,25 @@ loginButton.addEventListener('click', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  console.log(window.location.pathname);
   const loginButton = document.getElementById('login-button');
   if (window.location.pathname === '/FrontEnd/login.html') {
     loginButton.style.fontWeight = 'bold';
   }
 });
+
+// const loginForm = document.getElementById('login-form');
+
+// loginForm.addEventListener('submit', function (event) {
+//   event.preventDefault();
+
+//   const email = document.getElementById('email').value;
+//   const password = document.getElementById('password').value;
+//   if (email == 'admin@example.com' && password == '12345') {
+//     alert('Login Successful!');
+//   } else {
+//     alert('The email or password you entered is wrong!');
+//   }
+// });
 
 // Initialisation de l'application
 setupFilterButtons();
