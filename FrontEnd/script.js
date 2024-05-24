@@ -130,7 +130,7 @@ function filterData(data, categoryId) {
     : data.filter((item) => item.categoryId === categoryId);
 }
 
-//Login Section
+//Rediriger vers la section Login
 
 const loginButton = document.getElementById('login-button');
 loginButton.addEventListener('click', function () {
@@ -144,20 +144,112 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// const loginForm = document.getElementById('login-form');
-
-// loginForm.addEventListener('submit', function (event) {
-//   event.preventDefault();
-
-//   const email = document.getElementById('email').value;
-//   const password = document.getElementById('password').value;
-//   if (email == 'admin@example.com' && password == '12345') {
-//     alert('Login Successful!');
-//   } else {
-//     alert('The email or password you entered is wrong!');
-//   }
-// });
-
 // Initialisation de l'application
 setupFilterButtons();
 main();
+
+//Comportement de l'état "Logged in"
+
+const token = localStorage.getItem('authToken');
+if (token) {
+  setUpLoggedInState();
+}
+
+function setUpLoggedInState() {
+  const modifyButton = createModifyButton();
+  wrapHeaderAndAddModifyButton(modifyButton);
+  setupLogout();
+}
+
+function wrapHeaderAndAddModifyButton(modifyButton) {
+  const header = document.querySelector('#portfolio > h2');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'header-wrapper';
+  header.parentNode.insertBefore(wrapper, header);
+  wrapper.appendChild(header);
+  wrapper.appendChild(modifyButton);
+}
+
+function createModifyButton() {
+  const button = createButtonwithIcon(
+    'btn-modify',
+    'fa-regular fa-pen-to-square',
+    ' modifier'
+  );
+
+  const modal = createModal();
+  addContentToModal(modal, '<h2>Modifier le Projet</h2>');
+
+  button.addEventListener('click', function () {
+    modal.style.display = 'block';
+  });
+
+  return button;
+}
+
+function createButtonwithIcon(btnClass, iconClass, textContent) {
+  const button = document.createElement('button');
+  button.className = btnClass;
+  const icon = document.createElement('i');
+  icon.className = iconClass;
+  button.appendChild(icon);
+  const text = document.createTextNode(textContent);
+  button.appendChild(text);
+  return button;
+}
+
+function setupLogout() {
+  const login = document.getElementById('login-button');
+  login.innerHTML = 'logout';
+  login.onclick = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/FrontEnd/index.html';
+  };
+}
+
+//Création de la fenêtre modale
+
+function getOrCreateModal() {
+  let modal = document.getElementById(MODAL_ID);
+  if (!modal) {
+    modal = createModal();
+    document.body.appendChild(modal);
+  }
+  return modal;
+}
+
+function createModal() {
+  const modal = document.createElement('div');
+  modal.id = 'modal';
+  modal.className = 'modal';
+
+  const modalContent = document.createElement('div');
+  modalContent.className = 'modal-content';
+
+  const closeBtn = createCloseButton();
+
+  modalContent.appendChild(closeBtn);
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+
+  return modal;
+}
+
+function createCloseButton() {
+  const closeBtn = document.createElement('span');
+  closeBtn.className = 'close';
+  closeBtn.textContent = '×';
+
+  closeBtn.onclick = function () {
+    modal.style.display = 'none';
+  };
+  return closeBtn;
+}
+
+// Ajouter du contenu à la modale
+function addContentToModal(modal, content) {
+  const modalContent = modal.querySelector('.modal-content');
+  const contentElement = document.createElement('div');
+  contentElement.innerHTML = content;
+  modalContent.appendChild(contentElement);
+}
