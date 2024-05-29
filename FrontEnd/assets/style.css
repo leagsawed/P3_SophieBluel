@@ -261,7 +261,7 @@ li:hover {
   background-color: white;
 }
 
-.btn:hover {
+.btn-select:hover {
   background-color: #1d61542c;
   cursor: pointer;
 }
@@ -392,7 +392,6 @@ footer nav ul {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
   width: 45%;
   border-radius: 10px;
 }
@@ -411,7 +410,7 @@ footer nav ul {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 10%;
+  margin: 0 12%;
 }
 
 .gallery-container h2 {
@@ -419,7 +418,7 @@ footer nav ul {
   font-family: 'Work Sans';
   font-weight: lighter;
   font-size: 24px;
-  margin: 10% 0;
+  margin: 8% 0;
 }
 
 .image-container {
@@ -428,12 +427,12 @@ footer nav ul {
   justify-content: flex-start;
   align-content: flex-start;
   width: 100%;
-  padding-bottom: 15%;
+  padding-bottom: 14%;
   border-bottom: 1px solid #b3b3b3;
 }
 
 .img-wrapper {
-  width: 95px;
+  width: 90px;
   height: auto;
 
   position: relative;
@@ -445,11 +444,14 @@ footer nav ul {
 }
 
 .delete-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 0;
-  margin: 6%;
-  padding: 6%;
+  margin: 6px;
+  padding: 4px;
   border-radius: 2px;
   color: white;
   background-color: black;

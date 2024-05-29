@@ -114,8 +114,8 @@ function handleButtonClick(button, itemButton) {
 
 // Réinitialisation du style des boutons
 function resetButtonStyle() {
-  document.querySelectorAll('.btn').forEach((button) => {
-    button.className = 'btn';
+  document.querySelectorAll('.btn-select').forEach((button) => {
+    button.className = 'btn-select';
   });
 }
 
@@ -274,6 +274,7 @@ function displayImagesInModal(data, container) {
   data.forEach((item) => {
     const imgWrapper = document.createElement('div');
     imgWrapper.className = 'img-wrapper';
+    imgWrapper.setAttribute('data-id', item.id);
 
     const img = document.createElement('img');
     img.src = item.imageUrl;
@@ -282,13 +283,46 @@ function displayImagesInModal(data, container) {
 
     const deleteIcon = document.createElement('i');
     deleteIcon.className = 'fa-solid fa-trash-can delete-icon';
-    deleteIcon.onclick = () => deleteProject(item.id, container);
+    deleteIcon.onclick = () => deleteProject(item.id, container, event);
 
     imgWrapper.appendChild(img);
     imgWrapper.appendChild(deleteIcon);
     container.appendChild(imgWrapper);
   });
 }
+
+async function deleteProject(id, container, event) {
+  event.preventDefault();
+  const authToken = localStorage.getItem('authToken');
+  const headers = new Headers();
+
+  if (authToken) {
+    headers.append('Authorization', `Bearer ${authToken}`);
+  }
+
+  try {
+    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+      method: 'DELETE',
+      headers: headers,
+    });
+
+    if (response.ok) {
+      const elementToRemove = document.querySelector(
+        `.img-wrapper[data-id="${id}]`
+      );
+      if (elementToRemove) {
+        container.removeChild(elementToRemove);
+      }
+      console.log('Projet supprimé avec succès');
+    } else {
+      throw new Error('Échec de la suppression du projet');
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression du projet:', error);
+    alert('Impossible de supprimer le projet. Veuillez réessayer.');
+  }
+}
+
 // Initialisation de l'application
 setupFilterButtons();
 main();
