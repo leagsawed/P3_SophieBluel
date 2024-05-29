@@ -239,7 +239,18 @@ li:hover {
   margin: 3em 0;
 }
 
-.btn {
+.btn-primary {
+  font-family: 'Syne';
+  font-weight: 700;
+  color: white;
+  background-color: #1d6154;
+  margin: 2.5em auto 1.5em auto;
+  padding: 10px 50px;
+  text-align: center;
+  border-radius: 60px;
+}
+
+.btn-select {
   font-family: 'Syne';
   border-radius: 2rem;
   padding: 0.5rem 0.5rem;
@@ -374,7 +385,7 @@ footer nav ul {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4); /* Fond noir semi-transparent */
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -382,13 +393,66 @@ footer nav ul {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%; /* Adapté pour un affichage plus central et focalisé */
+  width: 45%;
+  border-radius: 10px;
 }
 
 .close {
-  color: #aaa;
+  color: black;
   float: right;
   font-size: 28px;
   font-weight: bold;
+  cursor: pointer;
+}
+
+/* Modale gallerie */
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10%;
+}
+
+.gallery-container h2 {
+  text-align: center;
+  font-family: 'Work Sans';
+  font-weight: lighter;
+  font-size: 24px;
+  margin: 10% 0;
+}
+
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  padding-bottom: 15%;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+.img-wrapper {
+  width: 95px;
+  height: auto;
+
+  position: relative;
+  margin: 5px;
+}
+
+.gallery-img {
+  width: 100%;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 6%;
+  padding: 6%;
+  border-radius: 2px;
+  color: white;
+  background-color: black;
+  font-size: 9px;
   cursor: pointer;
 }

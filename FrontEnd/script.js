@@ -20,6 +20,7 @@ async function main() {
     storedData = await fetchData(url);
     if (storedData) {
       displayProjects(storedData);
+      setupPhotoGalleryModal(storedData);
     }
   } catch (error) {
     console.error('Échec du chargement des projets :', error);
@@ -86,7 +87,7 @@ function createButton(id, text) {
   const button = document.createElement('button');
   button.id = id;
   button.textContent = text;
-  button.className = 'btn';
+  button.className = 'btn-select';
   return button;
 }
 
@@ -144,10 +145,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-// Initialisation de l'application
-setupFilterButtons();
-main();
-
 //Comportement de l'état "Logged in"
 
 const token = localStorage.getItem('authToken');
@@ -177,8 +174,8 @@ function createModifyButton() {
     ' modifier'
   );
 
-  const modal = createModal();
-  addContentToModal(modal, '<h2>Modifier le Projet</h2>');
+  const modal = getOrCreateModal('modal');
+  // addContentToModal(modal, '<h2>Modifier le Projet</h2>');
 
   button.addEventListener('click', function () {
     modal.style.display = 'block';
@@ -209,18 +206,18 @@ function setupLogout() {
 
 //Création de la fenêtre modale
 
-function getOrCreateModal() {
-  let modal = document.getElementById(MODAL_ID);
+function getOrCreateModal(modalId) {
+  let modal = document.getElementById('modal');
   if (!modal) {
-    modal = createModal();
+    modal = createModal(modalId);
     document.body.appendChild(modal);
   }
   return modal;
 }
 
-function createModal() {
+function createModal(modalId) {
   const modal = document.createElement('div');
-  modal.id = 'modal';
+  modal.id = modalId;
   modal.className = 'modal';
 
   const modalContent = document.createElement('div');
@@ -246,10 +243,52 @@ function createCloseButton() {
   return closeBtn;
 }
 
-// Ajouter du contenu à la modale
-function addContentToModal(modal, content) {
+// personaliser la gallerie de la modale
+
+function setupPhotoGalleryModal(data) {
+  const modal = getOrCreateModal('photoGalleryModal');
   const modalContent = modal.querySelector('.modal-content');
-  const contentElement = document.createElement('div');
-  contentElement.innerHTML = content;
-  modalContent.appendChild(contentElement);
+  const galleryContainer = document.createElement('div');
+  galleryContainer.className = 'gallery-container';
+  modalContent.appendChild(galleryContainer);
+
+  const title = document.createElement('h2');
+  title.textContent = 'Galerie Photo';
+  galleryContainer.appendChild(title);
+
+  const imageContainer = document.createElement('div');
+  imageContainer.className = 'image-container';
+  displayImagesInModal(data, imageContainer);
+  galleryContainer.appendChild(imageContainer);
+
+  const addButton = document.createElement('button');
+  addButton.textContent = 'Ajouter une photo';
+  addButton.className = 'btn-primary';
+  // addButton.onclick = openAddPhotoModal;
+  galleryContainer.appendChild(addButton);
+
+  return modal;
 }
+
+function displayImagesInModal(data, container) {
+  data.forEach((item) => {
+    const imgWrapper = document.createElement('div');
+    imgWrapper.className = 'img-wrapper';
+
+    const img = document.createElement('img');
+    img.src = item.imageUrl;
+    img.alt = item.title;
+    img.className = 'gallery-img';
+
+    const deleteIcon = document.createElement('i');
+    deleteIcon.className = 'fa-solid fa-trash-can delete-icon';
+    deleteIcon.onclick = () => deleteProject(item.id, container);
+
+    imgWrapper.appendChild(img);
+    imgWrapper.appendChild(deleteIcon);
+    container.appendChild(imgWrapper);
+  });
+}
+// Initialisation de l'application
+setupFilterButtons();
+main();
