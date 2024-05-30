@@ -379,7 +379,7 @@ footer nav ul {
 /* Modale  */
 
 .modal {
-  display: none;
+  display: block;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -476,4 +476,14 @@ footer nav ul {
   flex-direction: column;
   justify-content: center;
   margin: 0 12%;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-container h2 {
+  margin: 4% 0 8% 0;
 }
