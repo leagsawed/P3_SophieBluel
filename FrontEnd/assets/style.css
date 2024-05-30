@@ -471,19 +471,113 @@ footer nav ul {
   cursor: pointer;
 }
 
-.form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 12%;
-}
-
 .main-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 12%;
+}
+
 .main-container h2 {
-  margin: 4% 0 8% 0;
+  margin: 4% 0 4% 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#photoTitle {
+  height: 50px;
+  width: 100%;
+  font-size: 1.2em;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  margin: 0.5em 0 1em 0;
+}
+
+#photoCategory {
+  height: 50px;
+  width: 100%;
+
+  font-size: 1.2em;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  margin: 0.5em 0 2em 0;
+  padding: 0 10px;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #cbd6dc;
+  background: #e8f1f6;
+  padding: 20px 0;
+  text-align: center;
+  margin: 20px 0;
+  border-radius: 3px;
+  width: 100%;
+}
+
+.upload-icon {
+  font-size: 70px;
+}
+
+.upload-btn {
+  color: #308685;
+  background: #cbd6dc;
+  font-weight: bold;
+  font-family: 'Work Sans';
+  border: none;
+  width: 30%;
+  min-width: 170px;
+  padding: 10px 20px;
+  border-radius: 2rem;
+  margin: 5px 0;
+}
+
+.upload-btn:hover {
+  background: #b9d3e2;
+}
+
+.upload-text {
+  color: #444444;
+  font-size: 10px;
+  font-family: 'Work Sans';
+}
+
+label {
+  font-family: 'Work Sans';
+  align-self: flex-start;
+}
+
+.submit-div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid #b3b3b3;
+}
+
+#addPhotoForm .btn-valider {
+  width: 50%;
+  background-color: #a7a7a7;
+  border: none;
+  padding: 0.8rem;
+}
+
+#addPhotoForm .btn-valider:hover {
+  background-color: #1d6154;
 }

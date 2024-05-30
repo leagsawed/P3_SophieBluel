@@ -135,11 +135,66 @@ function setupContentAddPhoto() {
     setupContentGalleryModal(storedData);
   });
 
+  const title = document.createElement('h2');
+  title.textContent = 'Ajout Photo';
+  mainContainer.appendChild(title);
+
   const formContainer = document.createElement('div');
   formContainer.className = 'form-container';
   mainContainer.appendChild(formContainer);
 
-  const title = document.createElement('h2');
-  title.textContent = 'Ajout Photo';
-  mainContainer.appendChild(title);
+  const form = document.createElement('form');
+  form.id = 'addPhotoForm';
+  form.action = '#';
+  form.method = 'post';
+  formContainer.appendChild(form);
+
+  const uploadContainer = document.createElement('div');
+  uploadContainer.className = 'upload-container';
+  const icon = document.createElement('i');
+  icon.className = 'upload-icon fa-regular fa-image';
+  const uploadButton = document.createElement('button');
+  uploadButton.className = 'upload-btn btn';
+  uploadButton.textContent = '+ Ajouter photo';
+  const uploadText = document.createElement('span');
+  uploadText.textContent = 'jpg, png : 4mo max';
+  uploadText.className = 'upload-text';
+  uploadContainer.appendChild(icon);
+  uploadContainer.appendChild(uploadButton);
+  uploadContainer.appendChild(uploadText);
+  form.appendChild(uploadContainer);
+
+  const titleLabel = document.createElement('label');
+  titleLabel.textContent = 'Titre';
+  titleLabel.htmlFor = 'photoTitle';
+  const titleInput = document.createElement('input');
+  titleInput.type = 'text';
+  titleInput.id = 'photoTitle';
+  titleInput.name = 'photoTitle';
+  form.appendChild(titleLabel);
+  form.appendChild(titleInput);
+
+  const categoryLabel = document.createElement('label');
+  categoryLabel.textContent = 'Catégorie';
+  categoryLabel.htmlFor = 'photoCategory';
+  const categorySelect = document.createElement('select');
+  categorySelect.id = 'photoCategory';
+  categorySelect.name = 'photoCategory';
+
+  const categoryOption = document.createElement('option');
+  categoryOption.textContent = ' ';
+  categoryOption.disabled = true;
+  categoryOption.selected = true;
+  categorySelect.appendChild(categoryOption);
+  form.appendChild(categoryLabel);
+  form.appendChild(categorySelect);
+
+  const submitDiv = document.createElement('div');
+  submitDiv.className = 'submit-div';
+  form.appendChild(submitDiv);
+  const submitButton = document.createElement('input');
+  submitButton.type = 'submit';
+  submitButton.value = 'Valider';
+  submitButton.className = 'btn btn-valider';
+  submitDiv.appendChild(submitButton);
 }
