@@ -87,7 +87,7 @@ function createButton(id, text) {
   const button = document.createElement('button');
   button.id = id;
   button.textContent = text;
-  button.className = 'btn-select';
+  button.className = 'btn btn-select';
   return button;
 }
 
@@ -115,7 +115,7 @@ function handleButtonClick(button, itemButton) {
 // Réinitialisation du style des boutons
 function resetButtonStyle() {
   document.querySelectorAll('.btn-select').forEach((button) => {
-    button.className = 'btn-select';
+    button.className = 'btn btn-select';
   });
 }
 
@@ -167,16 +167,23 @@ function wrapHeaderAndAddModifyButton(modifyButton) {
   wrapper.appendChild(modifyButton);
 }
 
+function setupLogout() {
+  const login = document.getElementById('login-button');
+  login.innerHTML = 'logout';
+  login.onclick = () => {
+    localStorage.removeItem('authToken');
+    window.location.href = '/FrontEnd/index.html';
+  };
+}
+
 function createModifyButton() {
   const button = createButtonwithIcon(
-    'btn-modify',
+    'btn btn-modify',
     'fa-regular fa-pen-to-square',
     ' modifier'
   );
 
   const modal = getOrCreateModal('modal');
-  // addContentToModal(modal, '<h2>Modifier le Projet</h2>');
-
   button.addEventListener('click', function () {
     modal.style.display = 'block';
   });
@@ -195,50 +202,44 @@ function createButtonwithIcon(btnClass, iconClass, textContent) {
   return button;
 }
 
-function setupLogout() {
-  const login = document.getElementById('login-button');
-  login.innerHTML = 'logout';
-  login.onclick = () => {
-    localStorage.removeItem('authToken');
-    window.location.href = '/FrontEnd/index.html';
-  };
-}
-
 //Création de la fenêtre modale
 
-function getOrCreateModal(modalId) {
+function getOrCreateModal(modalId, contentSetupFunction) {
   let modal = document.getElementById('modal');
   if (!modal) {
-    modal = createModal(modalId);
+    modal = createModal(modalId, contentSetupFunction);
     document.body.appendChild(modal);
   }
   return modal;
 }
 
-function createModal(modalId) {
+function createModal(modalId, contentSetupFunction) {
   const modal = document.createElement('div');
   modal.id = modalId;
   modal.className = 'modal';
 
   const modalContent = document.createElement('div');
   modalContent.className = 'modal-content';
-
-  const closeBtn = createCloseButton();
-
-  modalContent.appendChild(closeBtn);
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
+
+  const closeBtn = createCloseButton(modal);
+  modalContent.appendChild(closeBtn);
+
+  if (contentSetupFunction) {
+    contentSetupFunction(modalContent);
+  }
 
   return modal;
 }
 
-function createCloseButton() {
+function createCloseButton(modalId) {
   const closeBtn = document.createElement('span');
   closeBtn.className = 'close';
   closeBtn.textContent = '×';
 
   closeBtn.onclick = function () {
-    modal.style.display = 'none';
+    modalId.style.display = 'none';
   };
   return closeBtn;
 }
@@ -263,9 +264,18 @@ function setupPhotoGalleryModal(data) {
 
   const addButton = document.createElement('button');
   addButton.textContent = 'Ajouter une photo';
-  addButton.className = 'btn-primary';
-  // addButton.onclick = openAddPhotoModal;
+  addButton.className = 'btn btn-primary';
+  addButton.id = 'addPhotoButton';
   galleryContainer.appendChild(addButton);
+  addButton.addEventListener('click', function () {
+    const addPhotoModal = getOrCreateModal(
+      'addPhotoModal',
+      setupAddPhotoModalContent
+    );
+    console.log(addPhotoModal);
+    addPhotoModal.style.display = 'block';
+    modal.style.display = 'none';
+  });
 
   return modal;
 }
@@ -321,6 +331,25 @@ async function deleteProject(id, container, event) {
     console.error('Erreur lors de la suppression du projet:', error);
     alert('Impossible de supprimer le projet. Veuillez réessayer.');
   }
+}
+
+function setupAddPhotoModalContent(modalContent) {
+  const addPhotoModal = getOrCreateModal('photoGalleryModal');
+  const returnBtn = document.createElement('span');
+  returnBtn.className = 'return-btn fa-solid fa-arrow-left';
+  modalContent.appendChild(addPhotoModal);
+  modalContent.appendChild(returnBtn);
+  returnBtn.addEventListener('click', () => {
+    (addPhotoModal.style.display = 'none'), (modal.style.display = 'block');
+  });
+
+  const formContainer = document.createElement('div');
+  formContainer.className = 'form-container';
+  modalContent.appendChild(formContainer);
+
+  const title = document.createElement('h2');
+  title.textContent = 'Ajout photo';
+  formContainer.appendChild(title);
 }
 
 // Initialisation de l'application

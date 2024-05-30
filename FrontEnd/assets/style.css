@@ -228,7 +228,6 @@ li:hover {
 }
 
 .btn-modify:hover {
-  cursor: pointer;
   color: #b1663c;
 }
 
@@ -237,6 +236,10 @@ li:hover {
   justify-content: center;
   gap: 0.6rem;
   margin: 3em 0;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -263,7 +266,6 @@ li:hover {
 
 .btn-select:hover {
   background-color: #1d61542c;
-  cursor: pointer;
 }
 
 .active-button {
@@ -413,7 +415,7 @@ footer nav ul {
   margin: 0 12%;
 }
 
-.gallery-container h2 {
+.modal-content h2 {
   text-align: center;
   font-family: 'Work Sans';
   font-weight: lighter;
@@ -457,4 +459,21 @@ footer nav ul {
   background-color: black;
   font-size: 9px;
   cursor: pointer;
+}
+
+/* Modale ajout photo */
+
+.return-btn {
+  color: black;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 12%;
 }
